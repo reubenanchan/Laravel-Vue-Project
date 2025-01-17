@@ -1,16 +1,8 @@
-import './bootstrap'
+import { createApp } from 'vue';
+import TodoList from './components/TodoList.vue'; // Create TodoList component
 
-import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/vue3'
+const app = createApp({});
 
-createInertiaApp({
-  resolve: name => {
-    const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-    return pages[`./Pages/${name}.vue`]
-  },
-  setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
-      .use(plugin)
-      .mount(el)
-  },
-})
+app.component('todo-list', TodoList);
+
+app.mount('#app');
